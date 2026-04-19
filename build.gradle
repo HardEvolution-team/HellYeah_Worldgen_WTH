@@ -230,6 +230,20 @@ tasks.named(remapTaskName).configure {
     }
 }
 
+// Auto-copy built mod to PollyMC instance
+tasks.register('copyToMods', Copy) {
+    group = 'build'
+    description = 'Copies the remapped mod jar to the PollyMC mods folder.'
+    dependsOn tasks.named(remapTaskName)
+    from(tasks.named(remapTaskName).get().outputs.files)
+    into('C:/Users/ElectrifiedDed/AppData/Roaming/PollyMC/instances/hywg/.minecraft/mods')
+    rename { fileName ->
+        fileName.replace('-dev', '')
+    }
+}
+
+tasks.named('build').configure { finalizedBy('copyToMods') }
+
 compileTestJava {
     sourceCompatibility = targetCompatibility = JavaVersion.VERSION_21
 }

@@ -41,7 +41,8 @@ public class MixinRenderGlobal {
     private net.minecraft.client.multiplayer.WorldClient world;
 
     @Inject(method = "getRenderChunkOffset", at = @At("HEAD"), cancellable = true)
-    private void cam$getRenderChunkOffsetInject(BlockPos playerPos, RenderChunk renderChunkBase, net.minecraft.util.EnumFacing facing, CallbackInfoReturnable<RenderChunk> cir) {
+    private void cam$getRenderChunkOffsetInject(BlockPos playerPos, RenderChunk renderChunkBase,
+            net.minecraft.util.EnumFacing facing, CallbackInfoReturnable<RenderChunk> cir) {
         BlockPos blockpos = renderChunkBase.getBlockPosOffset16(facing);
 
         if (MathHelper.abs(playerPos.getX() - blockpos.getX()) > this.renderDistanceChunks * 16) {
@@ -51,14 +52,6 @@ public class MixinRenderGlobal {
         } else if (MathHelper.abs(playerPos.getZ() - blockpos.getZ()) > this.renderDistanceChunks * 16) {
             cir.setReturnValue(null);
         } else {
-            
-            if (facing == net.minecraft.util.EnumFacing.UP) {
-                net.minecraft.world.chunk.Chunk chunk = this.world.getChunk(blockpos.getX() >> 4, blockpos.getZ() >> 4);
-                if (renderChunkBase.getPosition().getY() > chunk.getTopFilledSegment() + 16) {
-                    cir.setReturnValue(null);
-                    return;
-                }
-            }
             cir.setReturnValue(((IViewFrustumAccessor) this.viewFrustum).cam$getRenderChunk(blockpos));
         }
     }
