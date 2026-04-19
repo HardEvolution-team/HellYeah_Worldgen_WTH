@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.ded.hywg.mixin.mod",
+  "plugin": "com.ded.hywg.ModMixinConfigPlugin",
+  "compatibilityLevel": "JAVA_8",
+  "target": "@env(MOD)",
+  "client": [
+
+  ],
+  "mixins": [],
+  "server": [],
+  "setSourceFile": true,
+  "minVersion": "0.8.7"
+}
