@@ -8,9 +8,8 @@ import net.minecraft.world.EnumSkyBlock;
 /// @since 1.0
 public interface IChunkLightingData {
 
-	short[] alfheim$getNeighborLightChecks();
-
-	void alfheim$setNeighborLightChecks(final short[] data);
+	long[][] alfheim$getNeighborLightChecks();
+	void alfheim$setNeighborLightChecks(final long[][] data);
 
 	boolean alfheim$isLightInitialized();
 

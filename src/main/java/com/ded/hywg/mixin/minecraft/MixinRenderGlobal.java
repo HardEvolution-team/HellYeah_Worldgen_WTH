@@ -14,18 +14,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(RenderGlobal.class)
 public class MixinRenderGlobal {
 
-
-
-    @Redirect(
-            method = "renderEntities",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/chunk/RenderChunk;getPosition()Lnet/minecraft/util/math/BlockPos;")
-    )
+    @Redirect(method = "renderEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/chunk/RenderChunk;getPosition()Lnet/minecraft/util/math/BlockPos;"))
     private BlockPos cam$redirectRenderChunkPosForEntityArray(RenderChunk renderChunk) {
         BlockPos pos = renderChunk.getPosition();
-        
+
         if (pos.getY() < 0 || pos.getY() >= WorldHeightConfig.WORLD_HEIGHT) {
-            
-            
+
             return new BlockPos(pos.getX(), 0, pos.getZ());
         }
         return pos;
@@ -56,74 +50,42 @@ public class MixinRenderGlobal {
         }
     }
 
-    @ModifyConstant(
-            method = "setupTerrain",
-            constant = @Constant(intValue = 256),
-            require = 0
-    )
+    @ModifyConstant(method = "setupTerrain", constant = @Constant(intValue = 256), require = 0)
     private int cam$setupTerrain(int v) {
         return WorldHeightConfig.WORLD_HEIGHT;
     }
 
-    @ModifyConstant(
-            method = "setupTerrain",
-            constant = @Constant(doubleValue = 256.0),
-            require = 0
-    )
+    @ModifyConstant(method = "setupTerrain", constant = @Constant(doubleValue = 256.0), require = 0)
     private double cam$setupTerrainD(double v) {
         return WorldHeightConfig.WORLD_HEIGHT;
     }
 
-    @ModifyConstant(
-            method = "setupTerrain",
-            constant = @Constant(intValue = 255),
-            require = 0
-    )
+    @ModifyConstant(method = "setupTerrain", constant = @Constant(intValue = 255), require = 0)
     private int cam$setupTerrainM1(int v) {
         return WorldHeightConfig.WORLD_HEIGHT_M1;
     }
 
-    @ModifyConstant(
-            method = "renderWorldBorder",
-            constant = @Constant(intValue = 256),
-            require = 0
-    )
+    @ModifyConstant(method = "renderWorldBorder", constant = @Constant(intValue = 256), require = 0)
     private int cam$renderWorldBorder(int v) {
         return WorldHeightConfig.WORLD_HEIGHT;
     }
 
-    @ModifyConstant(
-            method = "renderWorldBorder",
-            constant = @Constant(doubleValue = 256.0),
-            require = 0
-    )
+    @ModifyConstant(method = "renderWorldBorder", constant = @Constant(doubleValue = 256.0), require = 0)
     private double cam$renderWorldBorderD(double v) {
         return WorldHeightConfig.WORLD_HEIGHT;
     }
 
-    @ModifyConstant(
-            method = "markBlockRangeForRenderUpdate(IIIIII)V",
-            constant = @Constant(intValue = 256),
-            require = 0
-    )
+    @ModifyConstant(method = "markBlockRangeForRenderUpdate(IIIIII)V", constant = @Constant(intValue = 256), require = 0)
     private int cam$markBlockRangeForRenderUpdate256(int v) {
         return WorldHeightConfig.WORLD_HEIGHT;
     }
 
-    @ModifyConstant(
-            method = "markBlockRangeForRenderUpdate",
-            constant = @Constant(intValue = 255),
-            require = 0
-    )
+    @ModifyConstant(method = "markBlockRangeForRenderUpdate", constant = @Constant(intValue = 255), require = 0)
     private int cam$markBlockRangeForRenderUpdate255(int v) {
         return WorldHeightConfig.WORLD_HEIGHT_M1;
     }
 
-    @ModifyConstant(
-            method = "loadRenderers",
-            constant = @Constant(intValue = 256),
-            require = 0
-    )
+    @ModifyConstant(method = "loadRenderers", constant = @Constant(intValue = 256), require = 0)
     private int cam$loadRenderers(int v) {
         return WorldHeightConfig.WORLD_HEIGHT;
     }

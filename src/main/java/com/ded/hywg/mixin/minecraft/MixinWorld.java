@@ -25,6 +25,11 @@ public abstract class MixinWorld {
                 && pos.getY() >= 0 && pos.getY() < WorldHeightConfig.WORLD_HEIGHT;
     }
 
+    @Overwrite
+    public int getHeight() {
+        return WorldHeightConfig.WORLD_HEIGHT;
+    }
+
     
     @ModifyConstant(
             method = "setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;I)Z",
@@ -36,24 +41,10 @@ public abstract class MixinWorld {
     }
 
     
-    @ModifyConstant(
-            method = "getLight(Lnet/minecraft/util/math/BlockPos;Z)I",
-            constant = @Constant(intValue = 256),
-            require = 0
-    )
-    private int cam$getLight(int v) {
-        return WorldHeightConfig.WORLD_HEIGHT;
-    }
+
 
     
-    @ModifyConstant(
-            method = "getLightFromNeighborsFor",
-            constant = @Constant(intValue = 256),
-            require = 0
-    )
-    private int cam$lightNeighbors(int v) {
-        return WorldHeightConfig.WORLD_HEIGHT;
-    }
+
 
     
     @ModifyConstant(
@@ -76,14 +67,7 @@ public abstract class MixinWorld {
     }
 
     
-    @ModifyConstant(
-            method = "checkLightFor",
-            constant = @Constant(intValue = 256),
-            require = 0
-    )
-    private int cam$chkLight(int v) {
-        return WorldHeightConfig.WORLD_HEIGHT;
-    }
+
 
     
     @ModifyConstant(

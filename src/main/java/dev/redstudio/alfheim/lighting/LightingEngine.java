@@ -52,9 +52,9 @@ public final class LightingEngine {
 	// Layout parameters
 	// Length of bit segments
 	private static final int
-			L_X = 26,
-			L_Y = 8,
-			L_Z = 26,
+			L_X = 24,
+			L_Y = 12,
+			L_Z = 24,
 			L_L = 4;
 
 	// Bit segment shifts/positions

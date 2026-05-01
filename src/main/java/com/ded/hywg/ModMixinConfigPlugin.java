@@ -19,7 +19,6 @@ public class ModMixinConfigPlugin implements IMixinConfigPlugin {
         return null;
     }
 
-    
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         return switch (mixinClassName.split("\\.")[5]) {
